@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#oCanvas{
+				display:block;
+				margin:0 auto;
+				border:1px solid black;
+			}
+		</style>
+	</head>
+	<script src="js/draw.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<canvas id="oCanvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var oCanvas = document.getElementById("oCanvas");
+			var myCanvas = oCanvas.getContext("2d");
+			function count(per){
+				return (per/100)*2*Math.PI;
+			}
+//			draw.drawSector(myCanvas,250,250,200,count(0),count(45),"fill","red");
+//			draw.drawSector(myCanvas,250,250,200,count(45),count(45+30),"fill","yellow");
+//			draw.drawSector(myCanvas,250,250,200,count(45+30),count(45+30+25),"fill","blue");
+			function drawPieChart(num1,num2,num3,step,fn){
+				var num = 0;
+				var step1 = num1/step;
+				var step2 = num2/step;
+				var step3 = num3/step;
+				var start1 = 0;
+				var start2 = 0;
+				var start3 = 0;
+				var time = setInterval(function(){
+					num++;
+					start1+=step1;
+					start2+=step2;
+					start3+=step3;
+					draw.drawSector(myCanvas,250,250,200,count(0),count(start1),"fill","red");
+					draw.drawSector(myCanvas,250,250,200,count(num1),count(num1+start2),"fill","yellow");
+					draw.drawSector(myCanvas,250,250,200,count(num1+num2),count(num1+num2+start3),"fill","blue");
+					if(num>=step){
+						clearInterval(time);
+						draw.drawSector(myCanvas,250,250,200,count(0),count(num1),"fill","red");
+						draw.drawSector(myCanvas,250,250,200,count(num1),count(num1+num2),"fill","yellow");
+						draw.drawSector(myCanvas,250,250,200,count(num1+num2),count(num1+num2+num3),"fill","blue");
+						fn(num1,num2,num3);
+					}
+				},10)
+			}
+//			x = ox+r*cosa;
+//			y = oy+r*sina;
+			function text(num1,num2,num3){
+				var x1 = 250+100*Math.cos(count(num1)/2);
+				var y1 = 250+100*Math.sin(count(num1)/2);
+				var x2 = 250+100*Math.cos(count(num1)+count(num2)/2);
+				var y2 = 250+100*Math.sin(count(num1)+count(num2)/2);
+				var x3 = 250+100*Math.cos(count(num1)+count(num2)+count(num3)/2);
+				var y3 = 250+100*Math.sin(count(num1)+count(num2)+count(num3)/2);
+				function writeText(num,x,y){
+					myCanvas.font = "16 宋体";
+					myCanvas.fillStyle = "black";
+					myCanvas.fillText(num+"%",x,y);
+				}
+				console.log(x1+","+x2);
+				writeText(num1,x1,y1);
+				writeText(num2,x2,y2);
+				writeText(num3,x3,y3);
+			}
+			drawPieChart(45,30,25,100,text);
+		</script>
+	</body>
+</html>

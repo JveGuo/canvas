@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#oCanvas{
+				display:block;
+				border:1px solid black;
+				margin:100px auto 0;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="oCanvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var oCanvas = document.getElementById("oCanvas");
+			var myCanvas = oCanvas.getContext("2d");//设置canvas对象的2d场景
+			myCanvas.rect(100,100,300,300);//规定绘画区域
+			
+//			myCanvas.lineWidth = 10;
+//			myCanvas.strokeStyle = "#00FFFF";
+//			myCanvas.stroke();//描边
+//			
+//			
+//			myCanvas.fillStyle = "red";
+//			myCanvas.fill();//填充	
+
+			myCanvas.beginPath();//开始路径
+			myCanvas.moveTo(100,100);
+			myCanvas.lineTo(300,100);
+			myCanvas.lineTo(300,300);
+			myCanvas.lineTo(100,100);
+			myCanvas.closePath();
+//			myCanvas.fillStyle="#800080";
+//			myCanvas.fill();
+			myCanvas.strokeStyle = "#A52A2A";
+			myCanvas.lineWidth = "10";
+			myCanvas.stroke();
+			
+			myCanvas.beginPath();
+			myCanvas.moveTo(100,100);
+			myCanvas.lineTo(100,300);
+			myCanvas.closePath();
+			myCanvas.strokeStyle = "#800080";
+			myCanvas.stroke();
+
+			myCanvas.clearRect(100,100,100,100);
+		</script>
+	</body>
+</html>

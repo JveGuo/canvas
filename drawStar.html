@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#oCanvas{
+				display:block;
+				margin:0 auto;
+				border:1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="oCanvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+//			ox圆上点的横坐标 oy是圆上点的纵坐标  x是圆心横坐标 y是圆心纵坐标 r圆的半径 α是弧度夹角
+//			ox = x + r*cosα;
+//			oy = y + r*sinα;
+
+			var oCanvas = document.getElementById("oCanvas");
+			var myCanvas = oCanvas.getContext("2d");
+			function drawStar(obj,arcX,arcY,arcR,oStyle,color){
+				obj.beginPath();
+//				obj.moveTo(point(arcX,arcY,arcR,-Math.PI/2).ox,point(arcX,arcY,arcR,-Math.PI/2).oy);
+				for(var i=0;i<11;i+=2){
+					obj.lineTo(point(arcX,arcY,arcR,(72/360)*2*Math.PI*i-Math.PI/2).ox,point(arcX,arcY,arcR,(72/360)*2*Math.PI*i-Math.PI/2).oy);
+				}
+				obj.closePath();
+				if(oStyle=="fill"){
+					obj.fillStyle = color;
+					obj.fill();
+				}else if(oStyle=="stroke"){
+					obj.strokeStyle = color;
+					obj.stroke();
+				}
+				function point(x,y,r,radian){
+					var ox = x + r*Math.cos(radian);
+					var oy = y + r*Math.sin(radian);
+					return {
+						"ox":ox,
+						"oy":oy
+					}
+				}
+			}
+			drawStar(myCanvas,250,250,200,"fill","black");
+		</script>
+	</body>
+</html>

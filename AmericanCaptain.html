@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#oCanvas{
+				display:block;
+				margin:0 auto;
+				border:1px solid black;
+			}
+		</style>
+	</head>
+	<script type="text/javascript" src="js/draw.js"></script>
+	<body>
+		<canvas id="oCanvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var oCanvas = document.getElementById("oCanvas");
+			var myCanvas = oCanvas.getContext("2d");
+			
+			draw.drawArc(myCanvas,250,250,250,0,2*Math.PI,"fill","red");
+			draw.drawArc(myCanvas,250,250,200,0,2*Math.PI,"fill","white");
+			draw.drawArc(myCanvas,250,250,150,0,2*Math.PI,"fill","red");
+			draw.drawArc(myCanvas,250,250,100,0,2*Math.PI,"fill","blue");
+			draw.drawStar(myCanvas,250,250,100,"fill","white");
+		</script>
+	</body>
+</html>
